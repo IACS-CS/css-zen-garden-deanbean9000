@@ -39,6 +39,10 @@ h6 {
 h2, h3, h4, h5, h6 {
   font-size: 60px;
 }
+a {
+  color: rgb(255, 232, 102);
+  text-decoration: underline; 
+}
 h1 {
  color: black;
   -webkit-text-stroke-width: 1px;
@@ -58,11 +62,14 @@ h2 {
   height: 100vh;
   overflow: hidden;
 
-  /* starry image (file is in project root) + dark radial overlay for contrast */
+  /* starry image + darker radial overlay for stronger contrast */
   background:
+    radial-gradient(ellipse at center,
+      rgba(0,0,0,0.65) 0%,
+      rgba(0,0,0,0.50) 60%,
+      rgba(0,0,0,0.95) 100%),
     url("starry-sky-1655503_1280.jpg") center center / cover no-repeat;
 
-  /* perspective kept for the crawl tilt */
   perspective: 1200px;
   perspective-origin: 50% 90%;
 }
@@ -385,3 +392,53 @@ h2 {
 }
 
 /* End of AI-generated code */
+
+/* AI-generated: Adjust headers to black fill with yellow outline
+   Prompt used: "make the rest of the headers the same color with the black inside and yellow outside as the honors requirement header" */
+
+/* Apply to all headers, scoped to the page area to avoid global side-effects */
+#css-zen-garden h1,
+#css-zen-garden h2,
+#css-zen-garden h3,
+#css-zen-garden h4,
+#css-zen-garden h5,
+#css-zen-garden h6,
+.page-wrapper h1,
+.page-wrapper h2,
+.page-wrapper h3,
+.page-wrapper h4,
+.page-wrapper h5,
+.page-wrapper h6 {
+  font-family: "Orbitron", cursive; /* keep the header font you used */
+  color: #000;                      /* black fill */
+  -webkit-text-stroke-width: 1px;   /* stroke width for WebKit */
+  -webkit-text-stroke-color: #ffea00; /* yellow outline for WebKit */
+
+  /* Non-WebKit fallback: simulate outline with multiple text-shadows */
+  text-shadow:
+    -1px -1px 0 #ffea00,
+     1px -1px 0 #ffea00,
+    -1px  1px 0 #ffea00,
+     1px  1px 0 #ffea00,
+    -2px  0   0 #ffea00,
+     2px  0   0 #ffea00,
+     0   -2px 0 #ffea00,
+     0    2px 0 #ffea00;
+
+  /* preserve visual weight and legibility */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optional: tweak sizes if some headers were previously large */
+.page-wrapper h2,
+.page-wrapper h3,
+.page-wrapper h4,
+.page-wrapper h5,
+.page-wrapper h6 {
+  /* adjust as needed */
+  /* font-size: 60px; */
+}
+
+
+
