@@ -17,12 +17,17 @@
 /* Typography */
 
 /* Get your own import URL from Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+ Script:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap');
 .page-wrapper {
   /* Main font */
   font-family: Poppins, sans-serif;
+# design-selection {
+  hover {
+    
+  }
+}
 }
 h1,
 h2,
@@ -438,6 +443,299 @@ h2 {
 .page-wrapper h6 {
   /* adjust as needed */
   /* font-size: 60px; */
+}
+
+
+
+/* Flatten the crawl while hovering or keyboard-focusing the Select a Design area */
+#css-zen-garden:has(#design-selection:hover, #design-selection:focus-within) .page-wrapper {
+  /* remove the tilt and perceived depth */
+  transform: translate(-50%, -50%) rotateX(0deg) translateZ(0) !important;
+  transform-origin: 50% 50% !important;
+
+  /* tighten vertical padding so the flattened section looks natural */
+  padding-top: 6vh !important;
+  padding-bottom: 8vh !important;
+
+  /* allow natural flow when flattened */
+  height: auto !important;
+
+  /* smooth animation */
+  transition: transform 280ms cubic-bezier(.2,.9,.2,1), padding 280ms cubic-bezier(.2,.9,.2,1);
+  /* subtle elevation so it still reads above the stage */
+  z-index: 2;
+}
+
+/* Flatten the crawl while hovering the Select a Design area (preserve layout to avoid jumping) */
+#css-zen-garden:has(#design-selection:hover) .page-wrapper {
+  /* only alter the visual tilt, do not change height -> prevents scroll jumping */
+  transform: translate(-50%, -50%) rotateX(0deg) translateZ(0) !important;
+  transform-origin: 50% 50% !important;
+
+  /* preserve the panel dimensions used when not flattened (matches your taller panel) */
+  height: 98vh !important;
+  padding: 1vh 4vw 12vh !important;
+
+  /* keep scrolling behaviour unchanged */
+  overflow-y: auto !important;
+
+  /* animation for smooth transition */
+  transition: transform 280ms cubic-bezier(.2,.9,.2,1);
+  will-change: transform;
+  z-index: 2;
+}
+
+/* Make sure the effect also works nicely on smaller screens */
+@media (max-width: 900px) {
+  #css-zen-garden:has(#design-selection:hover, #design-selection:focus-within) .page-wrapper {
+    transform: translate(-50%, -50%) rotateX(0deg) translateZ(0) !important;
+    padding: 4vh 6vw 6vh !important;
+    width: 90vw !important;
+    height: auto !important;
+  }
+}
+
+@media (max-width: 480px) {
+  #css-zen-garden:has(#design-selection:hover, #design-selection:focus-within) .page-wrapper {
+    transform: translate(-50%, -50%) rotateX(0deg) translateZ(0) !important;
+    padding: 3.5vh 5vw 5vh !important;
+    width: 94vw !important;
+    height: auto !important;
+  }
+}
+
+@media (max-width: 900px) {
+  #css-zen-garden:has(#design-selection:hover) .page-wrapper {
+    transform: translate(-50%, -50%) rotateX(0deg) translateZ(0) !important;
+    height: 96vh !important;   /* match your responsive height */
+    padding: 8vh 6vw 10vh !important;
+    width: 86vw !important;
+  }
+}
+
+@media (max-width: 480px) {
+  #css-zen-garden:has(#design-selection:hover) .page-wrapper {
+    transform: translate(-50%, -50%) rotateX(0deg) translateZ(0) !important;
+    height: 92vh !important;   /* match your small-screen height */
+    padding: 8vh 5vw 10vh !important;
+    width: 94vw !important;
+  }
+}
+
+/* AI-generated code: Created with the assistance of ChatGPT using the prompt
+   "animate the crawl smoothly both when hovering over and when the cursor moves off
+    the Select a Design area (pure CSS)". 
+   This moves the transition to the base .page-wrapper so the reverse (unhover) uses the same easing. */
+
+.page-wrapper {
+  /* ensure both hover-on and hover-off animate the visual tilt and padding */
+  transition: transform 280ms cubic-bezier(.2,.9,.2,1), padding 280ms cubic-bezier(.2,.9,.2,1);
+  will-change: transform, padding;
+}
+
+/* Keep the responsive rules in sync (optional but helpful) */
+@media (max-width: 900px) {
+  .page-wrapper {
+    transition: transform 280ms cubic-bezier(.2,.9,.2,1), padding 280ms cubic-bezier(.2,.9,.2,1);
+    will-change: transform, padding;
+  }
+}
+@media (max-width: 480px) {
+  .page-wrapper {
+    transition: transform 240ms cubic-bezier(.2,.9,.2,1), padding 240ms cubic-bezier(.2,.9,.2,1);
+    will-change: transform, padding;
+  }
+}
+
+/* End of AI-generated code */
+
+/* Flatten + color change when hovering or focusing the design-selection, archives, or resources lists.
+   Targets the stage when any of those areas are hovered/focused so the crawl flattens and text animates.
+   Uses a CSS variable so the colour is easy to update later. */
+:root{
+  --crawl-accent: #29EEF7;
+  --crawl-default: #ffea00;
+}
+
+/* Default crawl colour and smooth transition for both hover and unhover */
+.page-wrapper,
+.page-wrapper p,
+.page-wrapper li,
+.page-wrapper a {
+  color: var(--crawl-accent) !important;
+  transition: transform 280ms cubic-bezier(.2,.9,.2,1),
+              color 220ms ease,
+              padding 280ms cubic-bezier(.2,.9,.2,1);
+  will-change: transform, color, padding;
+}
+
+/* Make paragraph/list items inherit from .page-wrapper so color toggles reliably */
+.page-wrapper p,
+.page-wrapper li,
+.page-wrapper a {
+  color: inherit !important;
+}
+
+/* Trigger: hover or keyboard-focus inside design-selection, archives, or resources */
+/* Applies flatten transform + blue colour only while hovered/focused */
+#css-zen-garden:has(
+  #design-selection:hover,
+  #design-selection:focus-within,
+  #design-archives:hover,
+  #design-archives:focus-within,
+  #zen-resources:hover,
+  #zen-resources:focus-within
+) .page-wrapper {
+  transform: translate(-50%, -50%) rotateX(0deg) translateZ(0) !important;
+  transform-origin: 50% 50% !important;
+  color: var(--crawl-accent) !important;
+  z-index: 2;
+}
+
+/* Also explicitly colour the crawl content elements while the trigger is active */
+#css-zen-garden:has(
+  #design-selection:hover,
+  #design-selection:focus-within,
+  #design-archives:hover,
+  #design-archives:focus-within,
+  #zen-resources:hover,
+  #zen-resources:focus-within
+) .page-wrapper p,
+#css-zen-garden:has(
+  #design-selection:hover,
+  #design-selection:focus-within,
+  #design-archives:hover,
+  #design-archives:focus-within,
+  #zen-resources:hover,
+  #zen-resources:focus-within
+) .page-wrapper li,
+#css-zen-garden:has(
+  #design-selection:hover,
+  #design-selection:focus-within,
+  #design-archives:hover,
+  #design-archives:focus-within,
+  #zen-resources:hover,
+  #zen-resources:focus-within
+) .page-wrapper a {
+  color: var(--crawl-accent) !important;
+}
+
+/* Colour the panel headings (the small "Select a Design", "Archives", "Resources" headings) while hovered/focused */
+#css-zen-garden:has(#design-selection:hover, #design-selection:focus-within)    #design-selection h3,
+#css-zen-garden:has(#design-archives:hover, #design-archives:focus-within)      #design-archives h3,
+#css-zen-garden:has(#zen-resources:hover, #zen-resources:focus-within)         #zen-resources h3 {
+  color: var(--crawl-accent) !important;
+  transition: color 220ms ease;
+}
+
+/* Keep responsive behaviour in sync: only change transform (no height/padding toggles) to avoid jumps */
+@media (max-width: 900px) {
+  #css-zen-garden:has(
+    #design-selection:hover,
+    #design-selection:focus-within,
+    #design-archives:hover,
+    #design-archives:focus-within,
+    #zen-resources:hover,
+    #zen-resources:focus-within
+  ) .page-wrapper {
+    transform: translate(-50%, -50%) rotateX(0deg) translateZ(0) !important;
+    color: var(--crawl-accent) !important;
+  }
+}
+@media (max-width: 480px) {
+  #css-zen-garden:has(
+    #design-selection:hover,
+    #design-selection:focus-within,
+    #design-archives:hover,
+    #design-archives:focus-within,
+    #zen-resources:hover,
+    #zen-resources:focus-within
+  ) .page-wrapper {
+    transform: translate(-50%, -50%) rotateX(0deg) translateZ(0) !important;
+    color: var(--crawl-accent) !important;
+  }
+}
+
+/* ------------------------------
+   Scoped: panel-only blue on hover
+   ------------------------------ */
+
+/* easy-to-tune variables */
+:root {
+  --crawl-accent: #29EEF7;  /* blue */
+  --crawl-default: #ffea00; /* yellow */
+}
+
+/* default: crawl stays yellow */
+.page-wrapper,
+.page-wrapper p,
+.page-wrapper li,
+.page-wrapper a {
+  color: var(--crawl-default) !important;
+  transition: color 220ms ease, transform 280ms cubic-bezier(.2,.9,.2,1);
+  will-change: color, transform;
+}
+
+/* Flatten the stage when any of the three panels is hovered/focused */
+#css-zen-garden:has(
+  #design-selection:hover,
+  #design-selection:focus-within,
+  #design-archives:hover,
+  #design-archives:focus-within,
+  #zen-resources:hover,
+  #zen-resources:focus-within
+) .page-wrapper {
+  transform: translate(-50%, -50%) rotateX(0deg) translateZ(0) !important;
+  transform-origin: 50% 50% !important;
+  /* keep crawl color as default here — we change only the hovered panel below */
+}
+
+/* Change only the SELECT-A-DESIGN panel's text to blue while it is hovered/focused */
+#css-zen-garden:has(#design-selection:hover, #design-selection:focus-within) #design-selection,
+#css-zen-garden:has(#design-selection:hover, #design-selection:focus-within) #design-selection a {
+  color: var(--crawl-accent) !important;
+  transition: color 220ms ease;
+}
+
+/* Make the SELECT-A-DESIGN header solid blue with no stroke/shadow while hovered/focused */
+#css-zen-garden:has(#design-selection:hover, #design-selection:focus-within) #design-selection h3 {
+  color: var(--crawl-accent) !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+  /* keep font/size as-is */
+}
+
+/* Same behavior for ARCHIVES (only that panel's content/header becomes blue while hovered) */
+#css-zen-garden:has(#design-archives:hover, #design-archives:focus-within) #design-archives,
+#css-zen-garden:has(#design-archives:hover, #design-archives:focus-within) #design-archives a {
+  color: var(--crawl-accent) !important;
+  transition: color 220ms ease;
+}
+#css-zen-garden:has(#design-archives:hover, #design-archives:focus-within) #design-archives h3 {
+  color: var(--crawl-accent) !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+}
+
+/* Same behavior for RESOURCES */
+#css-zen-garden:has(#zen-resources:hover, #zen-resources:focus-within) #zen-resources,
+#css-zen-garden:has(#zen-resources:hover, #zen-resources:focus-within) #zen-resources a {
+  color: var(--crawl-accent) !important;
+  transition: color 220ms ease;
+}
+#css-zen-garden:has(#zen-resources:hover, #zen-resources:focus-within) #zen-resources h3 {
+  color: var(--crawl-accent) !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+}
+
+/* Responsive: keep the same targeted color behavior on smaller screens */
+@media (max-width: 900px) {
+  #css-zen-garden:has(#design-selection:hover, #design-selection:focus-within) #design-selection,
+  #css-zen-garden:has(#design-archives:hover, #design-archives:focus-within) #design-archives,
+  #css-zen-garden:has(#zen-resources:hover, #zen-resources:focus-within) #zen-resources {
+    color: var(--crawl-accent) !important;
+  }
 }
 
 
