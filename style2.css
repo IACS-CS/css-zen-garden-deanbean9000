@@ -8,7 +8,7 @@
 * don't want others to use the design]
 * 
 * Acknowledgments/Sources:
-* - 
+* - used copilot to help with responsive design, animation, sidebar menu formatting
 * - 
 * -
 */
@@ -21,6 +21,7 @@ body {
   color: rgb(255, 255, 255);
   margin: 0;
   min-height: 100vh;
+  font-family: 'Delius', cursive;
 }
 
 /* Layout structure */
@@ -34,8 +35,11 @@ body {
 
 /* Header styling */
 header {
-  text-align: center;
+  text-align: left;
   margin-bottom: 20px;
+  width: calc(100% - 300px);
+  display: inline-block;
+  vertical-align: top;
 }
 
 /* Main content layout */
@@ -43,7 +47,7 @@ header {
 .main {
   display: inline-block;
   vertical-align: top;
-  width: calc(100% - 300px); /* Adjust width to leave space for sidebar */
+  width: calc(100% - 300px);
   padding-right: 30px;
 }
 
@@ -62,61 +66,149 @@ header {
   transform: translateY(-50%);
   max-height: 90vh;
   overflow-y: auto;
+  transition: all 0.3s ease;
 }
 
-/* Position elements for dropdown */
-.page-wrapper {
-  position: relative;
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+  header,
+  .intro,
+  .main {
+    width: calc(100% - 280px);
+    padding-right: 20px;
+  }
+
+  .sidebar {
+    width: 220px;
+  }
 }
 
-header {
-  position: relative;
+@media screen and (max-width: 768px) {
+  .page-wrapper {
+    padding: 15px;
+  }
+
+  header,
+  .intro,
+  .main {
+    width: 100%;
+    padding-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .sidebar {
+    position: static;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    transform: none;
+    max-height: none;
+  }
+
+  /* Adjust sidebar sections for mobile */
+  .sidebar .wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+  }
+
+  .sidebar .wrapper > div {
+    width: calc(33.33% - 20px);
+    min-width: 200px;
+    margin-bottom: 0;
+  }
 }
 
-.summary {
-  position: relative;
+@media screen and (max-width: 480px) {
+  .page-wrapper {
+    padding: 10px;
+  }
+
+  header h1 {
+    font-size: 1.8em;
+  }
+
+  header h2 {
+    font-size: 1.2em;
+  }
+
+  .sidebar .wrapper {
+    flex-direction: column;
+  }
+
+  .sidebar .wrapper > div {
+    width: 100%;
+    margin-bottom: 20px;
+  }
 }
 
-/* Style for summary paragraphs */
-.summary p {
-  font-family: 'Delius', cursive;
-  background-color: rgb(61, 130, 151);
-  border-style: solid;
-  border-radius: 10%;
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: max-height 0.6s ease-out, opacity 0.3s ease-out, margin 0.3s ease-out;
-  margin: 0;
-}
-
-/* Show summary paragraphs when header is hovered */
-header:hover ~ * .summary p {
-  max-height: 500px;
-  opacity: 1;
-  margin: 10px 0;
-}
-/* Style for main content paragraphs and lists */
+/* Style for all dropdown content */
+.summary p,
 .preamble p,
 .explanation p,
 .participation p,
 .requirements p,
 .requirements ul {
-  font-family: 'Delius', cursive;
   background-color: rgb(61, 130, 151);
   border-style: solid;
   border-radius: 10%;
-  max-height: 0;
+  height: 0;
+  padding: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-height 0.6s ease-out, opacity 0.3s ease-out, margin 0.3s ease-out;
+  transition: all 0.3s ease-out;
   margin: 0;
+  font-size: clamp(14px, 2.5vw, 16px);
+  line-height: 1.6;
+}
+
+/* Show content on hover */
+header:hover ~ * .summary p,
+.preamble h3:hover ~ p,
+.explanation h3:hover ~ p,
+.participation h3:hover ~ p,
+.requirements h3:hover ~ p,
+.requirements h3:hover ~ ul,
+.requirements h4:hover ~ ul {
+  height: auto;
+  opacity: 1;
+  padding: 15px;
+  margin: 10px 0;
+}
+
+/* Style for main content paragraphs and lists */
+@media screen and (max-width: 768px) {
+  .preamble p,
+  .explanation p,
+  .participation p,
+  .requirements p,
+  .requirements ul {
+    border-radius: 5px;
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .preamble p,
+  .explanation p,
+  .participation p,
+  .requirements p,
+  .requirements ul {
+    border-radius: 3px;
+    padding: 8px;
+  }
 }
 
 /* Main content headers */
-h1 {
+h1, h2 {
   font-size: 2.5em;
   margin-bottom: 0.5em;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2em;
 }
 
 h2,
@@ -131,30 +223,36 @@ h2,
   border-radius: 5px;
   transition: background-color 0.3s;
   margin: 1em 0;
+  text-align: center;
+  display: block;
 }
 
-/* IACS text styling */
+/* Special text styling */
 .iacs {
   color: rgb(61, 130, 151);
   font-weight: bold;
 }
 
-/* Show content on header hover - main content only */
-.preamble h3:hover + p,
-.preamble h3:hover ~ p,
-.explanation h3:hover + p,
-.explanation h3:hover ~ p,
-.participation h3:hover + p,
-.participation h3:hover ~ p,
-.requirements h3:hover + p,
-.requirements h3:hover ~ p,
-.requirements h3:hover + ul,
-.requirements h3:hover ~ ul,
-.requirements h4:hover + ul,
-.requirements h4:hover ~ ul {
-  max-height: 500px;
-  opacity: 1;
-  margin: 10px 0;
+/* Center elements inside headers */
+h2 abbr, h3 abbr {
+  display: inline-block;
+}
+
+/* Ensure consistent centering for header content */
+h2, h3, h4 {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Hover effect for headers */
+h2:hover,
+.preamble h3:hover,
+.explanation h3:hover,
+.participation h3:hover,
+.requirements h3:hover,
+.requirements h4:hover {
+  background-color: rgba(61, 130, 151, 0.9);
 }
 
 li {
@@ -175,6 +273,7 @@ li {
   margin-bottom: 10px;
   padding-bottom: 5px;
   border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  font-family: 'Delius', cursive;
 }
 
 /* Add some scrollbar styling */
