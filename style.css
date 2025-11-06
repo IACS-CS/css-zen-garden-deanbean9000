@@ -22,11 +22,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap');
 .page-wrapper {
   /* Main font */
-  font-family: Poppins, sans-serif;
-# design-selection {
-  hover {
-    
-  }
+  font-family: "Orbitron", sans-serif;
+/* Fixed invalid CSS selector syntax */
+#design-selection:hover {
+  /* Styles will be added later if needed */
 }
 }
 h1,
@@ -151,6 +150,7 @@ h2 {
 /* body text/readability */
 .page-wrapper p,
 .page-wrapper li {
+  font-family: "Orbitron", sans-serif;   /* Added Orbitron font */
   text-align: center;            /* classic crawl is centered */
   color: #ffea00;
   font-size: 1.05rem;
@@ -267,12 +267,13 @@ h2 {
 @media (max-width: 900px) {
   .page-wrapper {
     width: 86vw;
-    height: 96vh;          /* nearly full height on tablets */          /* nearly full height on tablets */
+    height: 96vh;          /* nearly full height on tablets */
     padding: 8vh 6vw 10vh;
     transform: translate(-50%, -50%) rotateX(48deg) translateZ(18px);
   }
   .page-wrapper > * { max-width: 66ch; }
-  .page-wrapper p { font-size: 1rem; line-height: 1.65; }}
+  .page-wrapper p { font-size: 1rem; line-height: 1.65; }
+}
 }
 
 @media (max-width: 480px) {
@@ -441,8 +442,8 @@ h2 {
 .page-wrapper h4,
 .page-wrapper h5,
 .page-wrapper h6 {
-  /* adjust as needed */
-  /* font-size: 60px; */
+  /* Set a consistent size for all heading levels */
+  font-size: 2.5rem;
 }
 
 
